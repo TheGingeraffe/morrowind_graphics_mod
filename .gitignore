@@ -1,3 +1,4 @@
 secrets
 *.bak
 *.old
+api*
