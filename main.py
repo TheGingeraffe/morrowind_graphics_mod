@@ -9,13 +9,7 @@ import datetime
 import requests
 from bs4 import BeautifulSoup
 
-# Variables
-
-# Returns Windows, Linux, or Darwin
-operating_system = platform.system()
-
 # Functions
-
 
 def yesno(question):
     """Simple Yes/No Function."""
@@ -28,6 +22,8 @@ def yesno(question):
         return True
     return False
 
+# Returns Windows, Linux, or Darwin
+operating_system = platform.system()
 
 # Locates Morrowind install
 steam_installed = yesno("Is Morrowind installed with Steam?")
@@ -35,18 +31,16 @@ steam_installed = yesno("Is Morrowind installed with Steam?")
 if steam_installed == True:
     if operating_system == "Windows":
         import winreg
-        hkey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
-                              "SOFTWARE\WOW6432Node\Valve\Steam")
+        hkey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\WOW6432Node\Valve\Steam")
         steam_path = winreg.QueryValueEx(hkey, "InstallPath")
         morrowind_path = (steam_path[0] + "\steamapps\common\Morrowind")
         print("Morrowind install located at " + morrowind_path)
-        elif operating_system == "Linux":
-            print("You are using Linux")
-        elif operating_system == "Darwin":
-            print("You are using MacOS")
+    elif operating_system == "Linux":
+        print("You are using Linux")
+    elif operating_system == "Darwin":
+        print("You are using MacOS")
     else:
-        morrowind_path = input(
-            "What is the full installation path of Morrowind? ")
+        morrowind_path = input("What is the full installation path of Morrowind? ")
 
 # Backs up install
 morrowind_backup = yesno("Back up your Morrowind installation? ")
@@ -54,8 +48,7 @@ morrowind_backup = yesno("Back up your Morrowind installation? ")
 if morrowind_backup == True:
     print("Backing up Morrowind installation... ")
     date_now = datetime.datetime.now()
-    backup_destination = morrowind_path + \
-        date_now.strftime(".%m%d%Y_%H%M%S")
+    backup_destination = morrowind_path + date_now.strftime(".%m%d%Y_%H%M%S")
     copy_morrowind = shutil.copytree(morrowind_path, backup_destination)
     print("Morrowind backup location: ", copy_morrowind)
 
