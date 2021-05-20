@@ -54,14 +54,16 @@ if morrowind_backup == True:
     copy_morrowind = shutil.copytree(morrowind_path, backup_destination)
     print("Morrowind backup location:", copy_morrowind)
 
-# Downloads mods
-
 # Creates mod folder if doesn't exist
 
 mod_path = os.path.join(morrowind_path, "mods")
 
 if os.path.isfile(mod_path) == False:
     os.mkdir(mod_path)
-    print(mod_path + "was created. ")
+    print(mod_path + " was created. ")
+else:
+    print(mod_path + " already exists! ")
+
+# Downloads mods
 
 # Installs mods
