@@ -28,7 +28,7 @@ def yesno(question):
     return False
 
 # Locates Morrowind install
-def morrowind_pathfinder(steam_installed):
+def morrowind_pathfinder():
     steam_installed = yesno("Is Morrowind installed with Steam?")
     
     if steam_installed == True:
@@ -49,7 +49,7 @@ morrowind_pathfinder()
 
 # Backs up install
 
-def morrowind_backup(morrowind_path):
+def morrowind_backup():
     morrowind_backup = yesno("Back up your Morrowind installation? ")
     if morrowind_backup == True:
         print("Backing up Morrowind installation... ")
