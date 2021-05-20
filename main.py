@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
-# Packages
+## Packages
 import platform
 import sys
+import shutil
+import datetime
 
-
-# Variables
+## Variables
 
 # Returns Windows, Linux, or Darwin
 operating_system = platform.system()
 
-# Functions
+## Functions
 
 def yesno(question):
     """Simple Yes/No Function."""
@@ -23,10 +24,7 @@ def yesno(question):
         return True
     return False
 
-
-
 # Locates Morrowind install
-# Asks if Steam install
 
 steam_installed = yesno("Is Morrowind installed with Steam?")
 
@@ -41,14 +39,18 @@ if steam_installed == True:
         print("You are using Linux")
     elif operating_system == "Darwin":
         print("You are using MacOS")
-
-# C:\Program Files (x86)\Steam\steamapps\common
-
-
-# Else asks for Morrowind path
+else:
+    morrowind_path = input("What is the full installation path of Morrowind? ")
 
 # Backs up install
 
+morrowind_backup = yesno("Back up your Morrowind installation? ")
+
+if morrowind_backup == True:
+    print("Backing up Morrowind installation... ")
+    date_now = datetime.datetime.now()
+    backup_destination = morrowind_path + date_now.strftime("%m%d%Y_%H%M%S")
+    print(backup_destination)
 # Downloads mods
 
 # Installs mods
