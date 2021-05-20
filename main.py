@@ -35,7 +35,7 @@ if steam_installed == True:
         hkey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\WOW6432Node\Valve\Steam")
         steam_path = winreg.QueryValueEx(hkey, "InstallPath")
         morrowind_path = (steam_path[0] + "\steamapps\common\Morrowind")
-        print(morrowind_path)
+        print("Morrowind install located at " + morrowind_path)
     elif operating_system == "Linux":
         print("You are using Linux")
     elif operating_system == "Darwin":
@@ -52,7 +52,7 @@ if morrowind_backup == True:
     date_now = datetime.datetime.now()
     backup_destination = morrowind_path + date_now.strftime(".%m%d%Y_%H%M%S")
     copy_morrowind = shutil.copytree(morrowind_path, backup_destination)
-    print("Morrowind backup location:", copy_morrowind)
+    print("Morrowind backup location: ", copy_morrowind)
 
 # Creates mod folder if doesn't exist
 
@@ -60,9 +60,9 @@ mod_path = os.path.join(morrowind_path, "mods")
 
 if os.path.isfile(mod_path) == False:
     os.mkdir(mod_path)
-    print(mod_path + " was created. ")
+    print("Mod directory " + mod_path + " was created. ")
 else:
-    print(mod_path + " already exists! ")
+    print("Mod directory " + mod_path + " already exists! ")
 
 # Downloads mods
 
