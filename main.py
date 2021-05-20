@@ -69,12 +69,12 @@ else:
 # Downloads mods
 
 modlist_url = 'https://wiki.nexusmods.com/index.php/Morrowind_graphics_guide'
-reqs = requests.get(url)
+reqs = requests.get(modlist_url)
 soup = BeautifulSoup(reqs.text, 'html.parser')
 
-urls = []
+mod_urls = []
 for link in soup.find_all("div", {"class": "mw-collapsible-content"}):
         # Prints all modlinks # print(link.find('a')['href'])
         urls.append(link.find('a')['href'])
-print(urls)
+print(mod_urls)
 # Installs mods
