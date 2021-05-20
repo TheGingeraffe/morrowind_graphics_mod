@@ -4,3 +4,5 @@ shutil
 os
 datetime
 winreg
+requests
+bs4

@@ -28,33 +28,37 @@ def yesno(question):
     return False
 
 # Locates Morrowind install
+def morrowind_pathfinder(steam_installed):
+    steam_installed = yesno("Is Morrowind installed with Steam?")
+    
+    if steam_installed == True:
+        if operating_system == "Windows":
+            import winreg
+            hkey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\WOW6432Node\Valve\Steam")
+            steam_path = winreg.QueryValueEx(hkey, "InstallPath")
+            morrowind_path = (steam_path[0] + "\steamapps\common\Morrowind")
+            print("Morrowind install located at " + morrowind_path)
+        elif operating_system == "Linux":
+            print("You are using Linux")
+        elif operating_system == "Darwin":
+            print("You are using MacOS")
+    else:
+        morrowind_path = input("What is the full installation path of Morrowind? ")
 
-steam_installed = yesno("Is Morrowind installed with Steam?")
-
-if steam_installed == True:
-    if operating_system == "Windows":
-        import winreg
-        hkey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\WOW6432Node\Valve\Steam")
-        steam_path = winreg.QueryValueEx(hkey, "InstallPath")
-        morrowind_path = (steam_path[0] + "\steamapps\common\Morrowind")
-        print("Morrowind install located at " + morrowind_path)
-    elif operating_system == "Linux":
-        print("You are using Linux")
-    elif operating_system == "Darwin":
-        print("You are using MacOS")
-else:
-    morrowind_path = input("What is the full installation path of Morrowind? ")
+morrowind_pathfinder()
 
 # Backs up install
 
-morrowind_backup = yesno("Back up your Morrowind installation? ")
+def morrowind_backup(morrowind_path):
+    morrowind_backup = yesno("Back up your Morrowind installation? ")
+    if morrowind_backup == True:
+        print("Backing up Morrowind installation... ")
+        date_now = datetime.datetime.now()
+        backup_destination = morrowind_path + date_now.strftime(".%m%d%Y_%H%M%S")
+        copy_morrowind = shutil.copytree(morrowind_path, backup_destination)
+        print("Morrowind backup location: ", copy_morrowind)
 
-if morrowind_backup == True:
-    print("Backing up Morrowind installation... ")
-    date_now = datetime.datetime.now()
-    backup_destination = morrowind_path + date_now.strftime(".%m%d%Y_%H%M%S")
-    copy_morrowind = shutil.copytree(morrowind_path, backup_destination)
-    print("Morrowind backup location: ", copy_morrowind)
+morrowind_backup()
 
 # Creates mod folder if doesn't exist
 
