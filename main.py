@@ -2,6 +2,7 @@
 
 # Packages
 import getpass
+import platform
 import sys
 import winreg
 
