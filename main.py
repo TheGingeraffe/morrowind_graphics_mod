@@ -3,7 +3,7 @@
 # Packages
 import platform
 import sys
-import winreg
+
 
 # Variables
 
@@ -32,9 +32,11 @@ steam_installed = yesno("Is Morrowind installed with Steam?")
 
 if steam_installed == True:
     if operating_system == "Windows":
+        import winreg
         hkey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\WOW6432Node\Valve\Steam")
         steam_path = winreg.QueryValueEx(hkey, "InstallPath")
-        print(steam_path[0] + "\steamapps\common\Morrowind")
+        morrowind_path = (steam_path[0] + "\steamapps\common\Morrowind")
+        print(morrowind_path)
     elif operating_system == "Linux":
         print("You are using Linux")
     elif operating_system == "Darwin":
