@@ -55,4 +55,9 @@ if morrowind_backup == True:
 
 # Downloads mods
 
+# Creates mod folder
+
+mod_path = os.path.join(morrowind_path, "mods")
+print(mod_path)
+
 # Installs mods
