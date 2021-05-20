@@ -22,7 +22,10 @@ def site_login(login_url, username, password):
 username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
 
-driver = webdriver.Chrome()
+options = webdriver.ChromeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+driver = webdriver.Chrome(options=options)
+
 site_login(login_url, username, password)
 
 # Downloading mods
