@@ -36,4 +36,4 @@ def mod_dl(mod_url):
     slow_dl_button = browser.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
     slow_dl_button.click()
 
-mod_dl()
+mod_dl(mod_url)
