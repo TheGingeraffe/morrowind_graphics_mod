@@ -23,7 +23,8 @@ username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
 
 options = webdriver.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'], "detach", True)
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(options=options)
 
 site_login(login_url, username, password)
