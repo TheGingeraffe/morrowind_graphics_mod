@@ -6,14 +6,12 @@ import time
 
 mod_url = "https://www.nexusmods.com/morrowind/mods/19510?tab=files&file_id=1000007846"
 
-options = webdriver.ChromeOptions()
-options.add_argument('--ignore-certificate-errors')
-options.add_argument("--test-type")
-options.binary_location = "C:\Drivers\chromedriver.exe"
-#options.binary_location = "/usr/bin/chromium"
-driver = webdriver.Chrome(chrome_options=options)
-driver.get(mod_url)
+# FF WebDriver https://github.com/mozilla/geckodriver/releases
+# Chrome WebDriver https://sites.google.com/a/chromium.org/chromedriver/downloads
+
+browser = webdriver.Chrome()
+browser.get(mod_url)
 
 # click Slow Download
-slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
+slow_dl_button = browser.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
 slow_dl_button.click()
