@@ -38,7 +38,9 @@ if steam_installed == True:
         steam_path = winreg.QueryValueEx(hkey, "InstallPath")
         print(steam_path[0])
     elif operating_system == "Linux":
+        print("You are using Linux")
     elif operating_system == "Darwin":
+        print("You are using MacOS")
 
 # C:\Program Files (x86)\Steam\steamapps\common
 
