@@ -79,6 +79,8 @@ for link in soup.find_all("div", {"class": "mw-collapsible-content"}):
 # Downloads mods
 
 for mod_url in mod_urls:
+    # If nexusmods URL, download one way
     print(mod_url)
+    # If not, download another way
 
 # Installs mods
