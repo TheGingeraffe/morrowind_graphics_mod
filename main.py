@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 
 # Packages
-import getpass
 import platform
 import sys
 import winreg
 
 # Variables
-
-username = getpass.getuser()
 
 # Returns Windows, Linux, or Darwin
 operating_system = platform.system()
@@ -37,7 +34,7 @@ if steam_installed == True:
     if operating_system == "Windows":
         hkey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\WOW6432Node\Valve\Steam")
         steam_path = winreg.QueryValueEx(hkey, "InstallPath")
-        print(steam_path[0])
+        print(steam_path[0] + "\steamapps\common\Morrowind")
     elif operating_system == "Linux":
         print("You are using Linux")
     elif operating_system == "Darwin":
