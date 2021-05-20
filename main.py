@@ -66,7 +66,7 @@ if os.path.exists(mod_path) == False:
 else:
     print("Mod directory " + mod_path + " already exists! ")
 
-# Downloads mods
+# Creates modlist
 
 modlist_url = 'https://wiki.nexusmods.com/index.php/Morrowind_graphics_guide'
 reqs = requests.get(modlist_url)
@@ -74,7 +74,11 @@ soup = BeautifulSoup(reqs.text, 'html.parser')
 
 mod_urls = []
 for link in soup.find_all("div", {"class": "mw-collapsible-content"}):
-        # Prints all modlinks # print(link.find('a')['href'])
         mod_urls.append(link.find('a')['href'])
-print(mod_urls)
+
+# Downloads mods
+
+for mod_url in mod_urls:
+    print(mod_url)
+
 # Installs mods
