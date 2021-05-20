@@ -50,9 +50,9 @@ if morrowind_backup == True:
     print("Backing up Morrowind installation... ")
     date_now = datetime.datetime.now()
     backup_destination = morrowind_path + date_now.strftime(".%m%d%Y_%H%M%S")
-    print(backup_destination)
     copy_morrowind = shutil.copytree(morrowind_path, backup_destination)
     print("Morrowind backup location:", copy_morrowind)
+
 # Downloads mods
 
 # Installs mods
