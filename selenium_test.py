@@ -31,9 +31,8 @@ site_login(login_url, username, password)
 # Downloading mods
 
 def mod_dl(mod_url):
-    driver = webdriver.Chrome()
     driver.get(mod_url)
-    slow_dl_button = browser.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
+    slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
     slow_dl_button.click()
 
 mod_dl(mod_url)
