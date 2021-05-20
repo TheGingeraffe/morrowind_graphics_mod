@@ -6,6 +6,8 @@ import sys
 import shutil
 import os
 import datetime
+import requests
+from bs4 import BeautifulSoup
 
 ## Variables
 
@@ -66,4 +68,13 @@ else:
 
 # Downloads mods
 
+modlist_url = 'https://wiki.nexusmods.com/index.php/Morrowind_graphics_guide'
+reqs = requests.get(url)
+soup = BeautifulSoup(reqs.text, 'html.parser')
+
+urls = []
+for link in soup.find_all("div", {"class": "mw-collapsible-content"}):
+        # Prints all modlinks # print(link.find('a')['href'])
+        urls.append(link.find('a')['href'])
+print(urls)
 # Installs mods
