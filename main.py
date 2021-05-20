@@ -49,7 +49,7 @@ morrowind_backup = yesno("Back up your Morrowind installation? ")
 if morrowind_backup == True:
     print("Backing up Morrowind installation... ")
     date_now = datetime.datetime.now()
-    backup_destination = morrowind_path + date_now.strftime("%m%d%Y_%H%M%S")
+    backup_destination = morrowind_path + date_now.strftime(".%m%d%Y_%H%M%S")
     print(backup_destination)
 # Downloads mods
 
