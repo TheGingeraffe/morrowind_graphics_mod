@@ -58,7 +58,7 @@ if morrowind_backup == True:
 
 mod_path = os.path.join(morrowind_path, "mods")
 
-if os.path.isfile(mod_path) == False:
+if os.path.exists(mod_path) == False:
     os.mkdir(mod_path)
     print("Mod directory " + mod_path + " was created. ")
 else:
