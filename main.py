@@ -75,6 +75,6 @@ soup = BeautifulSoup(reqs.text, 'html.parser')
 mod_urls = []
 for link in soup.find_all("div", {"class": "mw-collapsible-content"}):
         # Prints all modlinks # print(link.find('a')['href'])
-        urls.append(link.find('a')['href'])
+        mod_urls.append(link.find('a')['href'])
 print(mod_urls)
 # Installs mods
