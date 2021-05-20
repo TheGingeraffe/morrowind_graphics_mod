@@ -56,9 +56,12 @@ if morrowind_backup == True:
 
 # Downloads mods
 
-# Creates mod folder
+# Creates mod folder if doesn't exist
 
 mod_path = os.path.join(morrowind_path, "mods")
-print(mod_path)
+
+if os.path.isfile(mod_path) == False:
+    os.mkdir(mod_path)
+    print(mod_path + "was created. ")
 
 # Installs mods
