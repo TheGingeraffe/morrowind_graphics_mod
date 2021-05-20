@@ -11,8 +11,6 @@ mod_url = "https://www.nexusmods.com/morrowind/mods/19510?tab=files&file_id=1000
 # FF WebDriver https://github.com/mozilla/geckodriver/releases
 # Chrome WebDriver https://sites.google.com/a/chromium.org/chromedriver/downloads
 
-driver = webdriver.Chrome()
-
 # Logging into nexusmods.com
 
 def site_login(login_url, username, password):
@@ -24,6 +22,7 @@ def site_login(login_url, username, password):
 username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
 
+driver = webdriver.Chrome()
 site_login(login_url, username, password)
 
 # Downloading mods
