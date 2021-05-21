@@ -21,9 +21,6 @@ def site_login(login_url, username, password):
     time.sleep(5)
     driver.find_element_by_partial_link_text("Nexus Mods Home").click()
     time.sleep(5)
-    driver.get(mod_url)
-    slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
-    slow_dl_button.click()
 
 username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
@@ -40,3 +37,5 @@ def mod_dl(mod_url):
     driver.get(mod_url)
     slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
     slow_dl_button.click()
+
+mod_dl(mod_url)
