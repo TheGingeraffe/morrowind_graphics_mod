@@ -18,9 +18,9 @@ def site_login(login_url, username, password):
     driver.find_element_by_id("user_login").send_keys(username)
     driver.find_element_by_id("password").send_keys(password)
     driver.find_element_by_name("commit").click() 
-    time.sleep(10)
+    time.sleep(2)
     driver.find_element_by_class("d-none d-md-flex").click()
-    time.sleep(10)
+    time.sleep(2)
     driver.get(mod_url)
     slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
     slow_dl_button.click()
@@ -29,7 +29,6 @@ username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
 
 options = webdriver.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
 options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(options=options)
 
