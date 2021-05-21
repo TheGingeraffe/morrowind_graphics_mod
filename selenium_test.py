@@ -5,7 +5,7 @@ from selenium import webdriver
 import time
 
 login_url = "https://users.nexusmods.com/auth/sign_in"
-mod_url = "https://www.nexusmods.com/morrowind/mods/19510?tab=files&file_id=1000007846"
+mod_url = "https://www.nexusmods.com/morrowind/mods/19510?tab=files"
 
 # Set and ask for WebDriver
 # FF WebDriver https://github.com/mozilla/geckodriver/releases
