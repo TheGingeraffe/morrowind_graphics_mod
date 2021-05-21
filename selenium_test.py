@@ -19,7 +19,7 @@ def site_login(login_url, username, password):
     driver.find_element_by_id("password").send_keys(password)
     driver.find_element_by_name("commit").click() 
     time.sleep(5)
-    driver.find_element_by_partial_link_text("authorize").click()
+    driver.find_element_by_link_text("https://users.nexusmods.com/oauth/authorize").click()
     time.sleep(5)
     driver.get(mod_url)
     slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
