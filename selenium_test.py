@@ -18,6 +18,7 @@ def site_login(login_url, username, password):
     driver.find_element_by_id("user_login").send_keys(username)
     driver.find_element_by_id("password").send_keys(password)
     driver.find_element_by_name("commit").click() 
+    time.sleep(10)
     driver.find_element_by_class("d-none d-md-flex").click()
     time.sleep(10)
     driver.get(mod_url)
