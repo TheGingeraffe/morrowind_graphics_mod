@@ -86,7 +86,8 @@ import time
 login_url = "https://users.nexusmods.com/auth/sign_in"
 mod_url = "https://www.nexusmods.com/morrowind/mods/19510?tab=files&file_id=1000007846"
 
-# Set and ask for WebDriver
+# TODO Set and ask for WebDriver
+# Maybe try dockerized version with remote WebDriver?
 # FF WebDriver https://github.com/mozilla/geckodriver/releases
 # Chrome WebDriver https://sites.google.com/a/chromium.org/chromedriver/downloads
 
@@ -108,19 +109,15 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--headless")
 prefs = {"download.default_directory" : mod_path}
 chrome_options.add_experimental_option("prefs",prefs)
-# Testing removing this option options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(options=chrome_options)
-
-site_login(login_url, username, password)
-
-# Downloading mods
 
 def mod_dl(mod_url):
     driver.get(mod_url)
     slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
     slow_dl_button.click()
 
+site_login(login_url, username, password)
 mod_dl(mod_url)
 
 
