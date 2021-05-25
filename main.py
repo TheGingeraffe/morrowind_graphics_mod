@@ -88,7 +88,7 @@ username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--headless")
 prefs = {"download.default_directory" : mod_path}
 chrome_options.add_experimental_option("prefs",prefs)
 
@@ -101,7 +101,9 @@ def mod_dl(mod_url):
         download_button = manual_download_section.find_element_by_tag_name('a')
         download_link = (download_button.get_attribute('href'))
         driver.get(download_link)
+        time.sleep(2)
         file_id = download_link.split("file_id=")
+        time.sleep(2)
         driver.get("https://www.nexusmods.com/Core/Libs/Common/Widgets/DownloadPopUp?id=" + file_id[1] + "&game_id=100&source=FileExpander")
     elif "modhistory" in mod_url:
         download_button = driver.find_element_by_id("dlb")
