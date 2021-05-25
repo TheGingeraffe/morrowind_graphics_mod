@@ -6,8 +6,9 @@ import sys
 import shutil
 import os
 import datetime
-import requests
-from bs4 import BeautifulSoup
+import winreg
+from selenium import webdriver
+import time
 
 # Functions
 
@@ -30,15 +31,16 @@ steam_installed = yesno("Is Morrowind installed with Steam?")
 
 if steam_installed == True:
     if operating_system == "Windows":
-        import winreg
         hkey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\WOW6432Node\Valve\Steam")
         steam_path = winreg.QueryValueEx(hkey, "InstallPath")
         morrowind_path = (steam_path[0] + "\steamapps\common\Morrowind")
         print("Morrowind install located at " + morrowind_path)
     elif operating_system == "Linux":
         print("You are using Linux")
+        exit
     elif operating_system == "Darwin":
         print("You are using MacOS")
+        exit
     else:
         morrowind_path = input("What is the full installation path of Morrowind? ")
 
@@ -52,7 +54,6 @@ if morrowind_backup == True:
     copy_morrowind = shutil.copytree(morrowind_path, backup_destination)
     print("Morrowind backup location: ", copy_morrowind)
 
-
 # Creates mod folder if doesn't exist
 
 mod_path = os.path.join(morrowind_path, "mods")
@@ -63,31 +64,9 @@ if os.path.exists(mod_path) == False:
 else:
     print("Mod directory " + mod_path + " already exists! ")
 
-# Creates modlist
-
-modlist_url = 'https://wiki.nexusmods.com/index.php/Morrowind_graphics_guide'
-reqs = requests.get(modlist_url)
-soup = BeautifulSoup(reqs.text, 'html.parser')
-
-mod_urls = []
-for link in soup.find_all("div", {"class": "mw-collapsible-content"}):
-    mod_urls.append(link.find('a')['href'])
-
 # Downloads mods
 
-for mod_url in mod_urls:
-    # If nexusmods URL, download one way
-    print(mod_url)
-    # If not, download another way
-
-from selenium import webdriver
-import time
-
-file_ids = []
-
 login_url = "https://users.nexusmods.com/auth/sign_in"
-mod_url = "https://www.nexusmods.com/morrowind/mods/19510"
-mod_path = "C:\Program Files (x86)\Steam\steamapps\common\Morrowind"
 
 # TODO Set and ask for WebDriver
 # Maybe try dockerized version with remote WebDriver?
@@ -122,8 +101,8 @@ def mod_dl(mod_url):
         download_button = manual_download_section.find_element_by_tag_name('a')
         download_link = (download_button.get_attribute('href'))
         driver.get(download_link)
-        slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
-        slow_dl_button.click()
+        file_id = download_link.split("file_id=")
+        driver.get("https://www.nexusmods.com/Core/Libs/Common/Widgets/DownloadPopUp?id=" + file_id[1] + "&game_id=100&source=FileExpander")
     elif "modhistory" in mod_url:
         download_button = driver.find_element_by_id("dlb")
         download_button.click()
@@ -133,8 +112,8 @@ mod_dl(mod_url)
 
 # Downloading from modhistory.com and other misc sources
 
-with open('miscmods.txt') as misc_mods:
-    for mod in misc_mods:
+with open('modlist.txt') as modlist:
+    for mod in modlist:
         mod_dl(mod)
 
 # Installs mods
