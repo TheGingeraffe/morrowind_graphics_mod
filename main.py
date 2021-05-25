@@ -83,20 +83,16 @@ for mod_url in mod_urls:
 from selenium import webdriver
 import time
 
+file_ids = []
+
 login_url = "https://users.nexusmods.com/auth/sign_in"
-mod_url = "https://www.nexusmods.com/morrowind/mods/19510?tab=files&file_id=1000007846"
+mod_url = "https://www.nexusmods.com/morrowind/mods/19510"
+mod_path = "C:\Program Files (x86)\Steam\steamapps\common\Morrowind"
 
 # TODO Set and ask for WebDriver
 # Maybe try dockerized version with remote WebDriver?
 # FF WebDriver https://github.com/mozilla/geckodriver/releases
 # Chrome WebDriver https://sites.google.com/a/chromium.org/chromedriver/downloads
-
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--headless")
-prefs = {"download.default_directory" : mod_path}
-chrome_options.add_experimental_option("prefs",prefs)
-
-driver = webdriver.Chrome(options=chrome_options)
 
 # Logging into nexusmods.com
 
@@ -105,26 +101,28 @@ def site_login(login_url, username, password):
     driver.find_element_by_id("user_login").send_keys(username)
     driver.find_element_by_id("password").send_keys(password)
     driver.find_element_by_name("commit").click() 
-    time.sleep(5)
+    time.sleep(2)
     driver.find_element_by_partial_link_text("Nexus Mods Home").click()
-    time.sleep(5)
+    time.sleep(2)
 
 username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
 
-# Downloading from nexusmods.com
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--headless")
+prefs = {"download.default_directory" : mod_path}
+chrome_options.add_experimental_option("prefs",prefs)
+
+driver = webdriver.Chrome(options=chrome_options)
 
 def mod_dl(mod_url):
     driver.get(mod_url)
-    if "nexusmods" in mod_url:
-        slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
-        slow_dl_button.click()
-    elif "modhistory" in mod_url:
-        download_button = driver.find_element_by_id("dlb")
-        download_button.click()
+    manual_download_section = driver.find_element_by_id("action-manual")
+    download_button = manual_download_section.find_element_by_tag_name('a')
+    download_link = (download_button.get_attribute('href'))
+    print(download_link)
 
 site_login(login_url, username, password)
-
 mod_dl(mod_url)
 
 # Downloading from modhistory.com and other misc sources
