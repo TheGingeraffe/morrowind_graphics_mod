@@ -116,6 +116,7 @@ def mod_dl(mod_url):
             download_button.click()
             time.sleep(2)
             popup_button = driver.find_element_by_class_name("btn")
+            print(popup_button.get_attribute('href'))
             popup_button.click()
             file_id = driver.current_url.split("file_id=")
             driver.get("https://www.nexusmods.com/Core/Libs/Common/Widgets/DownloadPopUp?id=" + file_id[1] + "&game_id=100&source=FileExpander")
