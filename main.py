@@ -91,6 +91,13 @@ mod_url = "https://www.nexusmods.com/morrowind/mods/19510?tab=files&file_id=1000
 # FF WebDriver https://github.com/mozilla/geckodriver/releases
 # Chrome WebDriver https://sites.google.com/a/chromium.org/chromedriver/downloads
 
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--headless")
+prefs = {"download.default_directory" : mod_path}
+chrome_options.add_experimental_option("prefs",prefs)
+
+driver = webdriver.Chrome(options=chrome_options)
+
 # Logging into nexusmods.com
 
 def site_login(login_url, username, password):
@@ -105,21 +112,26 @@ def site_login(login_url, username, password):
 username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--headless")
-prefs = {"download.default_directory" : mod_path}
-chrome_options.add_experimental_option("prefs",prefs)
-
-driver = webdriver.Chrome(options=chrome_options)
+# Downloading from nexusmods.com
 
 def mod_dl(mod_url):
     driver.get(mod_url)
-    slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
-    slow_dl_button.click()
+    if "nexusmods" in mod_url:
+        slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
+        slow_dl_button.click()
+    elif "modhistory" in mod_url:
+        download_button = driver.find_element_by_id("dlb")
+        download_button.click()
 
 site_login(login_url, username, password)
+
 mod_dl(mod_url)
 
+# Downloading from modhistory.com and other misc sources
+
+with open('miscmods.txt') as misc_mods:
+    for mod in misc_mods:
+        mod_dl(mod)
 
 # Installs mods
 
