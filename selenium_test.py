@@ -26,9 +26,10 @@ username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
 
 options = webdriver.ChromeOptions()
+chrome_options.add_argument("--headless")
 prefs = {"download.default_directory" : mod_path}
 options.add_experimental_option("prefs",prefs)
-options.add_experimental_option("detach", True)
+# Testing removing this option options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(options=options)
 
