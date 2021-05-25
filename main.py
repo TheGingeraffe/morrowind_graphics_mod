@@ -117,10 +117,16 @@ driver = webdriver.Chrome(options=chrome_options)
 
 def mod_dl(mod_url):
     driver.get(mod_url)
-    manual_download_section = driver.find_element_by_id("action-manual")
-    download_button = manual_download_section.find_element_by_tag_name('a')
-    download_link = (download_button.get_attribute('href'))
-    print(download_link)
+    if "nexusmods" in mod_url:
+        manual_download_section = driver.find_element_by_id("action-manual")
+        download_button = manual_download_section.find_element_by_tag_name('a')
+        download_link = (download_button.get_attribute('href'))
+        driver.get(download_link)
+        slow_dl_button = driver.find_elements_by_xpath("//button[@id='slowDownloadButton']")[0]
+        slow_dl_button.click()
+    elif "modhistory" in mod_url:
+        download_button = driver.find_element_by_id("dlb")
+        download_button.click()
 
 site_login(login_url, username, password)
 mod_dl(mod_url)
