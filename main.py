@@ -114,6 +114,7 @@ def mod_dl(mod_url):
             mod_files = driver.find_element_by_id("mod_files")
             download_button = mod_files.find_element_by_xpath("//span[text()='Manual download']")
             download_button.click()
+            time.sleep(2)
             popup_button = driver.find_element_by_class_name("btn")
             popup_button.click()
             file_id = driver.current_url.split("file_id=")
