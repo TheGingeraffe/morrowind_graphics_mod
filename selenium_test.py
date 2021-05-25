@@ -26,7 +26,10 @@ username = input("NexusMods username?: ")
 password = input("NexusMods password?: ")
 
 options = webdriver.ChromeOptions()
+prefs = {"download.default_directory" : mod_path}
+options.add_experimental_option("prefs",prefs)
 options.add_experimental_option("detach", True)
+
 driver = webdriver.Chrome(options=options)
 
 site_login(login_url, username, password)
