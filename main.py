@@ -102,9 +102,16 @@ def mod_dl(mod_url):
         download_link = (download_button.get_attribute('href'))
         driver.get(download_link)
         time.sleep(2)
+        #  If file_id doesn't exist, there is more than one main file
         file_id = download_link.split("file_id=")
         time.sleep(2)
-        driver.get("https://www.nexusmods.com/Core/Libs/Common/Widgets/DownloadPopUp?id=" + file_id[1] + "&game_id=100&source=FileExpander")
+        if file_id[1] is not None:
+            driver.get("https://www.nexusmods.com/Core/Libs/Common/Widgets/DownloadPopUp?id=" + file_id[1] + "&game_id=100&source=FileExpander")
+        else:
+            driver.get(download_link)
+            mod_files = driver.find_element_by_id("mod_files")
+            download_button = mod_files.find_element_by_xpath("//span[text()='Manual download']")
+            download_button.click()
     elif "modhistory" in mod_url:
         download_button = driver.find_element_by_id("dlb")
         download_button.click()
