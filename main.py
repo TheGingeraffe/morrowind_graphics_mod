@@ -94,6 +94,8 @@ chrome_options.add_experimental_option("prefs",prefs)
 
 driver = webdriver.Chrome(options=chrome_options)
 
+# This pop-up breaks it https://www.nexusmods.com/morrowind/mods/41102
+
 def mod_dl(mod_url):
     driver.get(mod_url)
     if "nexusmods" in mod_url:
