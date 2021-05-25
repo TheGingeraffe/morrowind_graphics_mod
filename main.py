@@ -105,7 +105,7 @@ def mod_dl(mod_url):
         #  If file_id doesn't exist, there is more than one main file
         file_id = download_link.split("file_id=")
         time.sleep(2)
-        if file_id[1] is not None:
+        if len(file_id) > 1:
             driver.get("https://www.nexusmods.com/Core/Libs/Common/Widgets/DownloadPopUp?id=" + file_id[1] + "&game_id=100&source=FileExpander")
         else:
             driver.get(download_link)
