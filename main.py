@@ -111,8 +111,8 @@ def mod_dl(mod_url):
             driver.get(download_link)
             mod_files = driver.find_element_by_id("mod_files")
             download_button = mod_files.find_element_by_xpath("//span[text()='Manual download']")
-            download_page = download_button.click()
-            slow_download_button = download_page.find_element_by_xpath("//span[text()='Slow download']")
+            download_button.click()
+            slow_download_button = driver.find_element_by_xpath("//span[text()='Slow download']")
             slow_download_button.click()
     elif "modhistory" in mod_url:
         download_button = driver.find_element_by_id("dlb")
