@@ -80,7 +80,7 @@ def site_login(login_url, username, password):
     driver.find_element_by_id("user_login").send_keys(username)
     driver.find_element_by_id("password").send_keys(password)
     driver.find_element_by_name("commit").click() 
-    time.sleep(2)
+    time.sleep(6)
     driver.find_element_by_partial_link_text("Nexus Mods Home").click()
     time.sleep(2)
 
