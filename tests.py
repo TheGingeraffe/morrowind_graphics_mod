@@ -17,7 +17,8 @@ import time
 file_ids = []
 
 login_url = "https://users.nexusmods.com/auth/sign_in"
-mod_url = "https://www.nexusmods.com/morrowind/mods/19510?tab=files&file_id=1000007846"
+mod_url = "https://www.nexusmods.com/morrowind/mods/19510?tab=files"
+mod_path = "C:\Program Files (x86)\Steam\steamapps\common\Morrowind"
 
 # TODO Set and ask for WebDriver
 # Maybe try dockerized version with remote WebDriver?
@@ -47,9 +48,8 @@ driver = webdriver.Chrome(options=chrome_options)
 
 def mod_dl(mod_url):
     driver.get(mod_url)
-    main_files = driver.find_elements_by_id("file-container-main-files")
-    print(main_files)
-
-
+    main_files = driver.find_element_by_id("file-container-main-files")
+    main_file = main_files.find_element_by_class("file-expander-header clearfix accopen")
+    print(main_file.get_attribute("data-id"))
 site_login(login_url, username, password)
 mod_dl(mod_url)
