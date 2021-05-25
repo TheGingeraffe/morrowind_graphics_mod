@@ -108,7 +108,6 @@ def mod_dl(mod_url):
         download_button.click()
 
 site_login(login_url, username, password)
-mod_dl(mod_url)
 
 # Downloading from modhistory.com and other misc sources
 
